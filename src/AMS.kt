@@ -2,6 +2,11 @@ import java.util.*
 
 fun main(args: Array<String>) {
     feedTheFish()
+
+    println(canAddFish(10.0, listOf(3, 3, 3)))                                   // ---> false
+    println(canAddFish(8.0, listOf(2, 2, 2), hasDecorations = false))            // ---> true
+    println(canAddFish(9.0, listOf(1, 1, 3), 3))                         // ---> false
+    println(canAddFish(10.0, listOf(), 7, true))           // ---> true
 }
 
 fun feedTheFish() {
@@ -28,6 +33,14 @@ fun fishFood(day: String): String {
         else -> "fasting"
     }
 }
+
+fun canAddFish(tankSize: Double, currentFish: List<Int>, fishSize: Int = 2, hasDecorations: Boolean = true): Boolean {
+    return (tankSize * if (hasDecorations) 0.8 else 1.0) >= (currentFish.sum().plus(fishSize))
+//    return (tankSize.times(if (hasDecorations) 0.8 else 1.0)) >= (currentFish.sum().plus(fishSize))
+}
+
+
+// region unused
 
 fun fishFoodV2(day: String): String {
 
@@ -62,4 +75,19 @@ fun dayOfWeek() {
         7 -> "Today is Saturday"
         else -> "Time has stopped"
     })
+
+
 }
+
+fun canAddFishV2(tankSize: Double, currentFish: List<Int>, fishSize: Int = 2, hasDecorations: Boolean = true): Boolean {
+
+    val fishesPerGallon = if (hasDecorations) 0.8f else 1f
+    val maxFishesAllowed = fishesPerGallon.times(tankSize)
+
+    val tankFishesSize = currentFish.sum()
+//    for (item: Int in currentFish) tankFishesSize = tankFishesSize.plus(item)
+
+    return tankFishesSize.plus(fishSize) <= maxFishesAllowed
+}
+
+// endregion unused
