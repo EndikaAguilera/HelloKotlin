@@ -29,3 +29,18 @@ fun eagerExample() {
     println("last: ${lazyMap.lastOrNull()}")    // prints -> last: flowerpot
     println("all: ${lazyMap.toList()}")         // prints -> all: [rock, pagoda, plastic plant, alligator, flowerpot]
 }
+
+fun filterCurries() {
+
+    val spices = listOf("curry", "pepper", "cayenne", "ginger", "red curry", "green curry", "red pepper")
+
+    spices.filter { it.contains("curry") }.sortedBy { it.length }
+
+    // Filtering by those that start with 'c' and end with 'e'
+    spices.filter {it.startsWith('c') && it.endsWith('e') }     // -> [cayenne]
+    // OR
+    //spices.filter{it.startsWith('c')}.filter{it.endsWith('e')}           // -> [cayenne]
+
+    // Filtering the first 3 items by 'c'
+    spices.take(3).filter{it.startsWith('c')} //                  // -> [curry, cayenne]
+}
