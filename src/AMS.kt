@@ -3,16 +3,45 @@ import java.util.*
 fun main(args: Array<String>) {
     feedTheFish()
 
-    println(canAddFish(10.0, listOf(3, 3, 3)))                                   // ---> false
-    println(canAddFish(8.0, listOf(2, 2, 2), hasDecorations = false))            // ---> true
-    println(canAddFish(9.0, listOf(1, 1, 3), 3))                         // ---> false
-    println(canAddFish(10.0, listOf(), 7, true))           // ---> true
+
+    // repeat (function from standard library)
+    repeat(2) {
+        println("A fish is swimming")
+    }
+
+//    println(canAddFish(10.0, listOf(3, 3, 3)))                                   // ---> false
+//    println(canAddFish(8.0, listOf(2, 2, 2), hasDecorations = false))            // ---> true
+//    println(canAddFish(9.0, listOf(1, 1, 3), 3))                         // ---> false
+//    println(canAddFish(10.0, listOf(), 7, true))           // ---> true
 }
+
+fun shouldChangeWater(day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
+//    val isTooHot = temperature > 30
+//    val isDirty = dirty > 30
+//    val isSunday = day == "Sunday"
+    return when {
+        isTooHot(temperature) -> true
+        isDirty(dirty) -> true
+        isSunday(day) -> true
+        else -> false
+    }
+}
+
+fun isTooHot(temperature: Int) = temperature > 30
+
+fun isDirty(dirty: Int) = dirty > 30
+
+fun isSunday(day: String) = day == "Thursday"
 
 fun feedTheFish() {
     val day = randomDay()
     val food = fishFood(day)
-    println("Today is $day and the fish eas $food")
+    println("Today is $day and the fish eats $food")
+    shouldChangeWater(day, 20, 50)
+    shouldChangeWater(day)
+    shouldChangeWater(day, dirty = 50)
+
+    if (shouldChangeWater(day)) println("Change water today")
 }
 
 fun randomDay(): String {
