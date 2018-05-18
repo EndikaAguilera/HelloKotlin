@@ -1,18 +1,24 @@
 import java.util.*
 
 fun main(args: Array<String>) {
-    feedTheFish()
 
+    feedTheFish()
 
     // repeat (function from standard library)
     repeat(2) {
         println("A fish is swimming")
     }
 
-//    println(canAddFish(10.0, listOf(3, 3, 3)))                                   // ---> false
-//    println(canAddFish(8.0, listOf(2, 2, 2), hasDecorations = false))            // ---> true
-//    println(canAddFish(9.0, listOf(1, 1, 3), 3))                         // ---> false
-//    println(canAddFish(10.0, listOf(), 7, true))           // ---> true
+//    println(canAddFish(10.0, listOf(3, 3, 3)))                                    // ---> false
+//    println(canAddFish(8.0, listOf(2, 2, 2), hasDecorations = false))             // ---> true
+//    println(canAddFish(9.0, listOf(1, 1, 3), 3))                                  // ---> false
+//    println(canAddFish(10.0, listOf(), 7, true))                                  // ---> true
+
+}
+
+
+fun swim() {
+
 }
 
 fun shouldChangeWater(day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
@@ -25,6 +31,21 @@ fun shouldChangeWater(day: String, temperature: Int = 22, dirty: Int = 20): Bool
         isSunday(day) -> true
         else -> false
     }
+}
+
+var dirty = 20
+
+val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
+fun feedFish(dirty: Int) = dirty + 10
+
+fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
+    return operation(dirty)
+}
+
+fun dirtyProcessor() {
+    dirty = updateDirty(dirty, waterFilter)
+    dirty = updateDirty(dirty, ::feedFish)
+    dirty = updateDirty(dirty, { dirty -> dirty + 50 })
 }
 
 fun isTooHot(temperature: Int) = temperature > 30
@@ -42,6 +63,9 @@ fun feedTheFish() {
     shouldChangeWater(day, dirty = 50)
 
     if (shouldChangeWater(day)) println("Change water today")
+
+    // call the processor
+    dirtyProcessor()
 }
 
 fun randomDay(): String {
