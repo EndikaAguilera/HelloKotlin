@@ -20,7 +20,7 @@ fun fishExample () {
 }
 
 // example class with constructor and multiple init (not recommended)
-//class FishExampleWithCostructors(val friendly: Boolean = true, volumeNeeded: Int) {
+//class FishExampleWithConstructors(val friendly: Boolean = true, volumeNeeded: Int) {
 //
 //    val size: Int
 //
